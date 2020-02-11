@@ -1,0 +1,14 @@
+input=["A123AA11", "А222АА123", "A12AA123", "A123CC1234", "AA123A12", "K881OE159", "K881СТ81", "H999OХ999", "Й555ОКЕЙГУГЛ191", "", "    ", "К99МАХА159", "#191ХО159"] # входной набор номеров для проверки
+standart=['А', 'В', 'Е', 'К', 'М', 'Н', 'О', 'Р', 'С', 'Т', 'У', 'Х', 'A', 'B', 'E', 'K', 'M', 'H', 'O', 'P', 'C', 'T', 'Y', 'X'] # русское и английское написание букв номера
+output=[] # пустой список для занесения прошедших проверку номеров
+for number in input:
+    number=number.upper() # делаем номера в одном виде заглавными
+    if len(number) in [8, 9]:
+        if number[0] in standart and number[1:4].isdigit() and number[4] in standart and number[5] in standart and (number[-1:-2].isdigit or number[-1:-3].isdigit):
+            # print('Номер =', number, 'международный')
+            output.append(number) # добавляем прошедшие проверку номера
+    #     else:
+    #         print('Номер =', number, 'НЕ подходит под стандарт')
+    # else:
+    #     print('Номер =', number, 'НЕ подходит под стандарт')
+print(output)
