@@ -1,0 +1,68 @@
+from random import randint
+
+print('Введите w = ', end='')
+w = int(input())
+print('Введите h = ', end='')
+h = int(input())
+print('Введите x0 = ', end='')
+x0 = int(input())
+print('Введите y0 = ', end='')
+y0 = int(input())
+
+
+class SearchPoint():
+
+    def __init__(self, w, h):
+        self.__x = randint(0, w)
+        self.__y = randint(0, h)
+
+    def where_is_point(self, x, y):
+        pos_x = pos_y = ''
+        if x > self.__x:
+            pos_x = 'L'
+        elif x < self.__x:
+            pos_x = 'R'
+        if y > self.__y:
+            pos_y = 'D'
+        elif y < self.__y:
+            pos_y = 'U'
+        return pos_x + pos_y
+
+
+SP = SearchPoint(w, h)
+count = 0
+while SP.where_is_point(x0, y0) != '':
+    count += 1
+    print('Итерация =', count, 'Направление движения :', SP.where_is_point(x0, y0))
+    if 'RD' in SP.where_is_point(x0, y0):
+        print('Она справа и снизу! Все направо и вниз!')
+        x0 += 1
+        y0 -= 1
+    elif 'RU' in SP.where_is_point(x0, y0):
+        print('Она справа и вверху! Все направо и вверх!')
+        x0 += 1
+        y0 += 1
+    elif 'LD' in SP.where_is_point(x0, y0):
+        print('Она слева и снизу! Все налево и вниз!')
+        x0 -= 1
+        y0 -= 1
+    elif 'LU' in SP.where_is_point(x0, y0):
+        print('Она слева и вверху! Все налево и вверх!')
+        x0 -= 1
+        y0 += 1
+    elif 'R' in SP.where_is_point(x0, y0):
+        print('Она справа! Все направо!')
+        x0 += 1
+    elif 'L' in SP.where_is_point(x0, y0):
+        print('Она слева! Все налево!')
+        x0 -= 1
+    elif 'U' in SP.where_is_point(x0, y0):
+        print('Она сверху! Все наверх!')
+        y0 += 1
+    elif 'D' in SP.where_is_point(x0, y0):
+        print('Она снизу! Все вниз!')
+        y0 -= 1
+    if count == w + h:
+        break
+
+print('Искомая точка имеет координаты :', 'x =', x0, 'y =', y0)
